@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 public class Params {
     private String message_type;
     private String message;
-    private int user_id;
-    private int group_id;
+    private long user_id;
+    private long group_id;
     private Boolean auto_escape;
+    private long duration;
+    private String special_title;
 }

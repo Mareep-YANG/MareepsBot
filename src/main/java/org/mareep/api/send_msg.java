@@ -10,11 +10,11 @@ import org.mareep.entity.Request;
 public class send_msg {
     public String action = "send_msg";
     public String message_type;
-    public int id;
+    public long id;
     public String message;
     public boolean auto_escape;
     public String echo;
-    public send_msg(String message_type, int id, String message, boolean auto_escape) {
+    public send_msg(String message_type, long id, String message, boolean auto_escape) {
         this.message_type = message_type;
         this.id = id;
         this.message = message;

@@ -6,6 +6,7 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.mareep.Main;
 import org.mareep.events.GroupMessageEvent;
+import org.mareep.events.GroupPokeEvent;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -37,12 +38,13 @@ public class wsClient extends WebSocketClient {
         if (jsonObject.containsKey("post_type")){
             post_type = jsonObject.getString("post_type");
         }
+        //message
         if (post_type!= null && post_type.equals("message")){
             String message_type = jsonObject.getString("message_type");
             //groupMessageEvent
             if (message_type.equals("group")){
-                int group_id = jsonObject.getInteger("group_id");
-                int user_id = jsonObject.getInteger("user_id");
+                long group_id = jsonObject.getLong("group_id");
+                long user_id = jsonObject.getLong("user_id");
                 String raw_message = jsonObject.getString("raw_message");
                 int font = jsonObject.getInteger("font");
                 GroupMessageEvent groupMessageEvent = new GroupMessageEvent(user_id,raw_message,font,group_id);
@@ -52,6 +54,24 @@ public class wsClient extends WebSocketClient {
                 Main.eventManager.fireEvent(groupMessageEvent);
             }
             //
+        }
+        //notice
+        if (post_type!=null && post_type.equals("notice")){
+            String notice_type = jsonObject.getString("notice_type");
+            //notify
+            if (notice_type.equals("notify")){
+                String sub_type = jsonObject.getString("sub_type");
+                //groupPokeEvent
+//                if (sub_type.equals("poke")){
+//                    int group_id = jsonObject.getInteger("group_id");
+//                    int user_id = jsonObject.getInteger("user_id");
+//                    GroupPokeEvent groupPokeEvent = new GroupPokeEvent(user_id,group_id);
+//                    groupPokeEvent.time = time;
+//                    groupPokeEvent.post_type = post_type;
+//                    groupPokeEvent.self_id = self_id;
+//                    Main.eventManager.fireEvent(groupPokeEvent);
+//                }
+            }
         }
     }
 
