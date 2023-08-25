@@ -12,6 +12,7 @@ import java.util.List;
 public class Main {
     public static String uri = "";
     public static EventManager eventManager;
+    public static wsClient client;
     public static void main(String[] args) throws URISyntaxException {
         ConfigurationManager configManager;
         //自动创建配置文件
@@ -26,24 +27,17 @@ public class Main {
         else {
              configManager = new ConfigurationManager("config.properties");
         }
-        // mode -> 0为http 1为WebSocket , url -> http或WebSocket的url
-        String username = configManager.getProperty("mode");
+        // mode 为 WebSocket , url -> http或WebSocket的url
+
         String url = configManager.getProperty("url");
-        if (username == null) {
-            configManager.setProperty("mode", "1");
-        }
         if (url == null){
             configManager.setProperty("url", "ws://0.0.0.0:8080");
         }
            //启动
         uri = url;
-        if (configManager.getProperty("mode").equals("0")) {
-
-        } else {
-            URI serverUri = new URI(uri); // 建立连接
-            wsClient client = new wsClient(serverUri);
-            client.connect();
-        }
+        URI serverUri = new URI(uri); // 建立连接
+        client = new wsClient(serverUri);
+        client.connect();
         //事件管理系统
          eventManager = new EventManager();
         eventManager.registerListener(new MessageListener());
