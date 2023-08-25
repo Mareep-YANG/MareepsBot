@@ -1,8 +1,11 @@
 package org.mareep.client;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.mareep.Main;
+import org.mareep.events.GroupMessageEvent;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,7 +24,26 @@ public class wsClient extends WebSocketClient {
 
     @Override
     public void onMessage(String message) {
-        System.out.println("接收到机器人消息 : " + message);
+
+//        GroupMessageEvent playerJoinEvent = new GroupMessageEvent();
+//        playerJoinEvent.setPlayerName("Alice");
+//
+//        eventManager.fireEvent(playerJoinEvent);
+        JSONObject jsonObject = JSON.parseObject(message);
+        int time = jsonObject.getInteger("time");
+        int self_id = jsonObject.getInteger("self_id");
+        String post_type = jsonObject.getString("post_type");
+        if (post_type.equals("message")){
+            String message_type = jsonObject.getString("message_type");
+            if (message_type.equals("group")){
+                int group_id = jsonObject.getInteger("group_id");
+                int user_id = jsonObject.getInteger("user_id");
+                String raw_message = jsonObject.getString("raw_message");
+                int font = jsonObject.getInteger("font");
+                GroupMessageEvent groupMessageEvent = new GroupMessageEvent(user_id,raw_message,font,group_id);
+                Main.eventManager.fireEvent(groupMessageEvent);
+            }
+        }
     }
 
     @Override

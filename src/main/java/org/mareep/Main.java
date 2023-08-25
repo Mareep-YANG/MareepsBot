@@ -1,15 +1,17 @@
 package org.mareep;
 
-import com.sun.net.httpserver.HttpServer;
 import org.mareep.client.wsClient;
+import org.mareep.test.MessageListener;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 public class Main {
     public static String uri = "";
+    public static EventManager eventManager;
     public static void main(String[] args) throws URISyntaxException {
         ConfigurationManager configManager;
         //自动创建配置文件
@@ -42,6 +44,11 @@ public class Main {
             wsClient client = new wsClient(serverUri);
             client.connect();
         }
+        //事件管理系统
+         eventManager = new EventManager();
+        eventManager.registerListener(new MessageListener());
+
+
 
 
 
