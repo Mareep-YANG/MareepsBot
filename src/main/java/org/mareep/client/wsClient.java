@@ -25,24 +25,33 @@ public class wsClient extends WebSocketClient {
     @Override
     public void onMessage(String message) {
 
-//        GroupMessageEvent playerJoinEvent = new GroupMessageEvent();
-//        playerJoinEvent.setPlayerName("Alice");
-//
-//        eventManager.fireEvent(playerJoinEvent);
+
         JSONObject jsonObject = JSON.parseObject(message);
-        int time = jsonObject.getInteger("time");
-        int self_id = jsonObject.getInteger("self_id");
-        String post_type = jsonObject.getString("post_type");
-        if (post_type.equals("message")){
+        int time = 0;int self_id = 0;String post_type = "";
+        if (jsonObject.containsKey("time")){
+            time = jsonObject.getInteger("time");
+        }
+        if (jsonObject.containsKey("self_id")){
+            self_id = jsonObject.getInteger("self_id");
+        }
+        if (jsonObject.containsKey("post_type")){
+            post_type = jsonObject.getString("post_type");
+        }
+        if (post_type!= null && post_type.equals("message")){
             String message_type = jsonObject.getString("message_type");
+            //groupMessageEvent
             if (message_type.equals("group")){
                 int group_id = jsonObject.getInteger("group_id");
                 int user_id = jsonObject.getInteger("user_id");
                 String raw_message = jsonObject.getString("raw_message");
                 int font = jsonObject.getInteger("font");
                 GroupMessageEvent groupMessageEvent = new GroupMessageEvent(user_id,raw_message,font,group_id);
+                groupMessageEvent.time = time;
+                groupMessageEvent.post_type = post_type;
+                groupMessageEvent.self_id = self_id;
                 Main.eventManager.fireEvent(groupMessageEvent);
             }
+            //
         }
     }
 
@@ -54,6 +63,7 @@ public class wsClient extends WebSocketClient {
     @Override
     public void onError(Exception ex) {
         System.out.println("错误 : " + ex.getMessage());
+        ex.printStackTrace();
     }
 
 }
