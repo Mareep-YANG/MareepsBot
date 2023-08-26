@@ -1,7 +1,9 @@
 package org.mareep;
 
 import org.mareep.client.wsClient;
+import org.mareep.command.CommandListener;
 import org.mareep.test.MessageListener;
+import org.mareep.test.testCommandListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,8 +44,8 @@ public class Main {
          eventManager = new EventManager();
         eventManager.registerListener(new MessageListener());
 
-
-
+        new CommandListener(337995320);
+        eventManager.registerListener(new testCommandListener());
 
 
     }

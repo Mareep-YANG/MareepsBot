@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.mareep.Main;
+import org.mareep.entity.Sender;
 import org.mareep.events.GroupMessageEvent;
 import org.mareep.events.GroupPokeEvent;
 
@@ -47,7 +48,8 @@ public class wsClient extends WebSocketClient {
                 long user_id = jsonObject.getLong("user_id");
                 String raw_message = jsonObject.getString("raw_message");
                 int font = jsonObject.getInteger("font");
-                GroupMessageEvent groupMessageEvent = new GroupMessageEvent(user_id,raw_message,font,group_id);
+                Sender sender = jsonObject.getObject("sender",Sender.class);
+                GroupMessageEvent groupMessageEvent = new GroupMessageEvent(user_id,raw_message,font,group_id,sender);
                 groupMessageEvent.time = time;
                 groupMessageEvent.post_type = post_type;
                 groupMessageEvent.self_id = self_id;

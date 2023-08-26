@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EventManager {
-    private Map<Class<? extends Event>, List<Method>> listeners = new HashMap<>();
+    private Map<Class<? extends Event>, List<EventListener>> listeners = new HashMap<>();
 
     public void registerListener(EventListener listener) {
         Class<?> clazz = listener.getClass();
@@ -22,20 +22,30 @@ public class EventManager {
                 Class<?>[] parameterTypes = method.getParameterTypes();
                 if (parameterTypes.length == 1 && Event.class.isAssignableFrom(parameterTypes[0])) {
                     Class<? extends Event> eventType = parameterTypes[0].asSubclass(Event.class);
-                    listeners.computeIfAbsent(eventType, k -> new ArrayList<>()).add(method);
+                    listeners.computeIfAbsent(eventType, k -> new ArrayList<>()).add(listener);
                 }
             }
         }
     }
 
     public void fireEvent(Event event) {
-        List<Method> eventListeners = listeners.get(event.getClass());
+        List<EventListener> eventListeners = listeners.get(event.getClass());
         if (eventListeners != null) {
-            for (Method method : eventListeners) {
-                try {
-                    method.invoke(method.getDeclaringClass().newInstance(), event);
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
+            for (EventListener listener : eventListeners) {
+                Class<?> clazz = listener.getClass();
+                Method[] methods = clazz.getMethods();
+
+                for (Method method : methods) {
+                    if (method.isAnnotationPresent(EventHandler.class)) {
+                        Class<?>[] parameterTypes = method.getParameterTypes();
+                        if (parameterTypes.length == 1 && parameterTypes[0].isAssignableFrom(event.getClass())) {
+                            try {
+                                method.invoke(listener, event);
+                            } catch (IllegalAccessException | InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
                 }
             }
         }
