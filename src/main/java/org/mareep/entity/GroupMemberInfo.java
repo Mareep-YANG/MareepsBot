@@ -1,0 +1,29 @@
+package org.mareep.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class GroupMemberInfo {
+    private long group_id;
+    private long user_id;
+    private String nickname;
+    private String card;
+    private String sex;
+    private int age;
+    private String area;
+    private String join_time;
+    private String last_sent_time;
+    private String level;
+    private String role;
+    private String unfriendly;
+    private String title;
+    private String title_expire_time;
+    private String card_changeable;
+    private long shut_up_timestamp;
+}

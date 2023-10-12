@@ -1,12 +1,16 @@
 package org.mareep.test;
 
+import lombok.SneakyThrows;
 import org.mareep.EventListener;
 import org.mareep.annotations.EventHandler;
 import org.mareep.api.send_msg;
 import org.mareep.api.set_group_ban;
+import org.mareep.api.set_group_card;
 import org.mareep.api.set_group_special_title;
 import org.mareep.events.GroupMessageEvent;
 import org.mareep.events.GroupPokeEvent;
+
+import static java.lang.Thread.sleep;
 
 
 public class MessageListener implements EventListener {

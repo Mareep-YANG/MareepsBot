@@ -39,6 +39,13 @@ public class wsClient extends WebSocketClient {
         if (jsonObject.containsKey("post_type")){
             post_type = jsonObject.getString("post_type");
         }
+        if (jsonObject.containsKey("status")){
+            // 本信息是一个回执
+            String status = jsonObject.getString("status");
+            if (status.equals("ok")){
+                String echo = jsonObject.getString("echo");
+            }
+        }
         //message
         if (post_type!= null && post_type.equals("message")){
             String message_type = jsonObject.getString("message_type");

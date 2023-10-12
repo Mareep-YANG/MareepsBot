@@ -16,5 +16,5 @@ public class Sender {
     private String role;
     private String sex;
     private String title;
-    private String user_id;
+    private long user_id;
 }

@@ -1,0 +1,36 @@
+package org.mareep.api;
+
+import com.alibaba.fastjson.JSON;
+import org.mareep.Main;
+import org.mareep.entity.GroupMemberInfo;
+import org.mareep.entity.Params;
+import org.mareep.entity.Request;
+
+public class get_group_member_info {
+    public String action = "get_group_member_info";
+    public long group_id;
+    public long user_id;
+    public boolean no_cache;
+    public String echo = String.valueOf(System.currentTimeMillis());
+    public get_group_member_info(long group_id, long user_id, boolean no_cache){
+        this.group_id = group_id;
+        this.user_id = user_id;
+        this.no_cache = no_cache;
+    }
+    public void get_group_member_info() {
+        Params params = Params.builder()
+                .group_id(group_id)
+                .user_id(user_id)
+                .no_cache(no_cache)
+                .build();
+        Request request = Request.builder()
+                .action(action)
+                .params(params)
+                .echo(echo)
+                .build();
+        String json = JSON.toJSONString(request);
+        Main.client.send(json);
+
+
+    }
+}

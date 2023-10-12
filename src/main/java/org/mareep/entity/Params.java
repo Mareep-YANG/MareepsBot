@@ -17,4 +17,6 @@ public class Params {
     private Boolean auto_escape;
     private long duration;
     private String special_title;
+    private boolean no_cache;
+    private String card;
 }

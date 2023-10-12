@@ -1,5 +1,6 @@
 package org.mareep;
 
+import org.mareep.api.set_group_card;
 import org.mareep.client.wsClient;
 import org.mareep.command.CommandListener;
 import org.mareep.test.MessageListener;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class Main {
     public static String uri = "";
+    public static List<String> EchoPool  ;
     public static EventManager eventManager;
     public static wsClient client;
     public static void main(String[] args) throws URISyntaxException {
@@ -29,7 +31,7 @@ public class Main {
         else {
              configManager = new ConfigurationManager("config.properties");
         }
-        // mode 为 WebSocket , url -> http或WebSocket的url
+        // mode 为 WebSocket , url -> WebSocket的url
 
         String url = configManager.getProperty("url");
         if (url == null){
@@ -46,6 +48,7 @@ public class Main {
 
         new CommandListener(337995320);
         eventManager.registerListener(new testCommandListener());
+
 
 
     }
