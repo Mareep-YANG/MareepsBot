@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.mareep.EventListener;
 import org.mareep.annotations.EventHandler;
+import org.mareep.api.get_group_member_info;
 import org.mareep.api.send_msg;
 import org.mareep.api.set_group_ban;
 import org.mareep.api.set_group_card;
@@ -33,6 +34,7 @@ public class testCommandListener implements EventListener {
                 }
 
             }
+
         }
 
 

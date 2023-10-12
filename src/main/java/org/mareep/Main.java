@@ -1,5 +1,6 @@
 package org.mareep;
 
+import com.alibaba.fastjson.JSONObject;
 import org.mareep.api.set_group_card;
 import org.mareep.client.wsClient;
 import org.mareep.command.CommandListener;
@@ -10,11 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 
 public class Main {
     public static String uri = "";
-    public static List<String> EchoPool  ;
+    public static HashMap<String , JSONObject> EchoPool = new HashMap<>()  ;
     public static EventManager eventManager;
     public static wsClient client;
     public static void main(String[] args) throws URISyntaxException {
@@ -42,11 +44,12 @@ public class Main {
         URI serverUri = new URI(uri); // 建立连接
         client = new wsClient(serverUri);
         client.connect();
+
         //事件管理系统
          eventManager = new EventManager();
         eventManager.registerListener(new MessageListener());
 
-        new CommandListener(337995320);
+        new CommandListener(833217638);
         eventManager.registerListener(new testCommandListener());
 
 

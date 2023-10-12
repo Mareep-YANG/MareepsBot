@@ -45,7 +45,6 @@ public class send_msg {
         Request request = Request.builder()
                 .action(action)
                 .params(params)
-                .echo(echo)
                 .build();
         String json = JSON.toJSONString(request);
         Main.client.send(json);

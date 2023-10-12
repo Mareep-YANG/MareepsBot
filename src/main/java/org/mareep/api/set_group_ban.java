@@ -25,7 +25,6 @@ public class set_group_ban {
         Request request = Request.builder()
                 .action(action)
                 .params(params)
-                .echo(echo)
                 .build();
         String json = JSON.toJSONString(request);
         Main.client.send(json);

@@ -28,8 +28,9 @@ public class wsClient extends WebSocketClient {
     public void onMessage(String message) {
 
 
-        JSONObject jsonObject = JSON.parseObject(message);
-        int time = 0;int self_id = 0;String post_type = "";
+        JSONObject jsonObject = JSON.parseObject(message); // 把收到信息转为Json对象
+        int time = 0;int self_id = 0;String post_type = ""; // 三个字段
+        //
         if (jsonObject.containsKey("time")){
             time = jsonObject.getInteger("time");
         }
@@ -39,13 +40,18 @@ public class wsClient extends WebSocketClient {
         if (jsonObject.containsKey("post_type")){
             post_type = jsonObject.getString("post_type");
         }
+        //echo
         if (jsonObject.containsKey("status")){
             // 本信息是一个回执
             String status = jsonObject.getString("status");
+            //回执状态为OK
             if (status.equals("ok")){
-                String echo = jsonObject.getString("echo");
+                if (jsonObject.containsKey("echo")){ // 对应请求是get
+                    Main.EchoPool.put(jsonObject.getString("echo"),jsonObject);
+                }
             }
         }
+        //
         //message
         if (post_type!= null && post_type.equals("message")){
             String message_type = jsonObject.getString("message_type");
