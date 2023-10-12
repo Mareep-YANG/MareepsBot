@@ -9,13 +9,13 @@ import org.mareep.events.CommandEvent;
 import org.mareep.events.GroupMessageEvent;
 
 public class CommandListener implements EventListener {
-    public long group_id;
+    public String group_id;
     public CommandListener() {
 
 
     }
 
-    public CommandListener(long group_id) {
+    public CommandListener(String group_id) {
 
         this.group_id = group_id;
         Main.eventManager.registerListener(this);
@@ -24,7 +24,7 @@ public class CommandListener implements EventListener {
 
     @EventHandler
     public void onMessage(GroupMessageEvent event) {
-        if (event.group_id == group_id) {
+        if (event.group_id.equals(group_id)) {
             if (event.raw_message.startsWith("/")) {
                 Sender sender = event.sender;
                 //为指令

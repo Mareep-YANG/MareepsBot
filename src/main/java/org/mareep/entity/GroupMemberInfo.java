@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GroupMemberInfo {
-    private long group_id;
-    private long user_id;
+    private String group_id;
+    private String user_id;
     private String nickname;
     private String card;
     private String sex;

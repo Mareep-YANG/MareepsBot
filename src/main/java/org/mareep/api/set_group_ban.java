@@ -7,11 +7,11 @@ import org.mareep.entity.Request;
 
 public class set_group_ban {
     public String action = "set_group_ban";
-    public long group_id;
-    public long user_id;
+    public String group_id;
+    public String user_id;
     public long duration;
     public String echo;
-    public set_group_ban(long group_id, long user_id, long duration) {
+    public set_group_ban(String group_id, String user_id, long duration) {
         this.group_id = group_id;
         this.user_id = user_id;
         this.duration = duration;

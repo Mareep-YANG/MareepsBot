@@ -9,11 +9,11 @@ import org.mareep.entity.Request;
 
 public class set_group_card {
     public String action = "set_group_card";
-    public long group_id;
-    public long user_id;
+    public String group_id;
+    public String user_id;
     public String card;
     public String echo;
-    public set_group_card( long group_id, long user_id,String card) {
+    public set_group_card( String group_id, String user_id,String card) {
         this.group_id = group_id;
         this.card = card;
         this.user_id = user_id;

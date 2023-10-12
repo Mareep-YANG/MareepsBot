@@ -15,16 +15,16 @@ public class MessageListener implements EventListener {
 
         @EventHandler
         public void onMessage(GroupMessageEvent event) {
-                if (event.group_id == 833217638 ) {
+                if (event.group_id.equals("833217638") ) {
                         if (event.raw_message.contains("原神") || event.raw_message.contains("op") ) {
                                 send_msg send_msg = new send_msg("group", event.group_id, "原神,启动!", false);
                                 send_msg.send_msg();
                         }
                         if (event.raw_message.contains("子涵")){
-                                new get_group_member_info(833217638 , 1956681558 , false).get_group_member_info(new GetApi.ResponseCallback() {
+                                new get_group_member_info("833217638" , "1956681558" , false).get_group_member_info(new GetApi.ResponseCallback() {
                                         @Override
                                         public void onSuccess(JSONObject vaule) {
-                                                new send_msg("group",833217638,vaule.toJSONString(), false).send_msg();
+                                                new send_msg("group","833217638",vaule.toJSONString(), false).send_msg();
                                         }
 
                                         @Override

@@ -7,14 +7,14 @@ public class CommandEvent extends Event{
     public Sender sender;
     public String label;
     public String[] args;
-    public long group_id;
+    public String group_id;
 
 
 
 
 
 
-    public CommandEvent(Sender sender , String label, String[] args , long group_id) {
+    public CommandEvent(Sender sender , String label, String[] args , String group_id) {
         this.sender = sender;
         this.label = label;
         this.args = args;

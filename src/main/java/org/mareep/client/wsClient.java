@@ -57,8 +57,8 @@ public class wsClient extends WebSocketClient {
             String message_type = jsonObject.getString("message_type");
             //groupMessageEvent
             if (message_type.equals("group")){
-                long group_id = jsonObject.getLong("group_id");
-                long user_id = jsonObject.getLong("user_id");
+                String group_id = jsonObject.getString("group_id");
+                String user_id = jsonObject.getString("user_id");
                 String raw_message = jsonObject.getString("raw_message");
                 int font = jsonObject.getInteger("font");
                 Sender sender = jsonObject.getObject("sender",Sender.class);
