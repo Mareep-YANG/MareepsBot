@@ -58,7 +58,11 @@
             <version>1.18.22</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.0.0</version> <!-- 检查并使用最新版本 -->
+        </dependency>
 
 
 

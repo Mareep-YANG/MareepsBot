@@ -21,9 +21,9 @@ public class GroupMemberInfo {
     private String last_sent_time;
     private String level;
     private String role;
-    private String unfriendly;
+    private boolean unfriendly;
     private String title;
-    private String title_expire_time;
-    private String card_changeable;
+    private long title_expire_time;
+    private boolean card_changeable;
     private long shut_up_timestamp;
 }

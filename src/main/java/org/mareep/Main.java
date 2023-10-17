@@ -49,7 +49,7 @@ public class Main {
          eventManager = new EventManager();
         eventManager.registerListener(new MessageListener());
 
-        new CommandListener("337995320");
+        new CommandListener("833217638");
         eventManager.registerListener(new testCommandListener());
 
 
