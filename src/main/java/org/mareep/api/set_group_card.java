@@ -23,8 +23,8 @@ public class set_group_card {
     public void set_group_card() {
         Params params;
         params = Params.builder()
-                .group_id(group_id)
-                .user_id(user_id)
+                .group_id(Long.parseLong(group_id))
+                .user_id(Long.parseLong(user_id))
                 .card(card)
 
                 .build();

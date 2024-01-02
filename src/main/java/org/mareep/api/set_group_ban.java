@@ -18,8 +18,8 @@ public class set_group_ban {
     }
     public void setBan() {
         Params params = Params.builder()
-                .group_id(group_id)
-                .user_id(user_id)
+                .group_id(Long.parseLong(group_id))
+                .user_id(Long.parseLong(user_id))
                 .duration(duration)
                 .build();
         Request request = Request.builder()

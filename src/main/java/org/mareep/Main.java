@@ -1,18 +1,18 @@
 package org.mareep;
 
 import com.alibaba.fastjson.JSONObject;
-import org.mareep.api.set_group_card;
 import org.mareep.client.wsClient;
 import org.mareep.command.CommandListener;
-import org.mareep.test.MessageListener;
 import org.mareep.test.testCommandListener;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static String uri = "";
@@ -39,20 +39,34 @@ public class Main {
         if (url == null){
             configManager.setProperty("url", "ws://0.0.0.0:8080");
         }
-           //启动
+        //启动
         uri = url;
         URI serverUri = new URI(uri); // 建立连接
         client = new wsClient(serverUri);
         client.connect();
 
         //事件管理系统
-         eventManager = new EventManager();
-        eventManager.registerListener(new MessageListener());
+        eventManager = new EventManager();
+        List<String> group_id = new ArrayList<String>() {
+            {
+                add("833217638");
+                add("337995320");
+                add("859562984");
+                add("663520905");
+            }
+        };
 
-        new CommandListener("833217638");
+        new CommandListener(group_id);
         eventManager.registerListener(new testCommandListener());
 
-
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            String stringValue = scanner.next();
+            if (stringValue.equalsIgnoreCase("exit")) {
+                client.close();
+                System.exit(0);
+            }
+        }
 
     }
 }

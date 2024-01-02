@@ -20,8 +20,8 @@ public class set_group_special_title {
     }
     public void setSpecial_title() {
         Params params = Params.builder()
-                .group_id(group_id)
-                .user_id(user_id)
+                .group_id(Long.parseLong(group_id))
+                .user_id(Long.parseLong(user_id))
                 .special_title(special_title)
                 .duration(duration)
                 .build();

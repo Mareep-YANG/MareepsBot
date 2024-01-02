@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Params {
     private String message_type;
-    private String message;
-    private String user_id;
-    private String group_id;
+    private Message message[];
+    private long user_id;
+    private long group_id;
     private Boolean auto_escape;
     private long duration;
     private String special_title;

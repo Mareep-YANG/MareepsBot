@@ -27,8 +27,8 @@ public class get_group_member_info extends GetApi{
 
     public void get_group_member_info(ResponseCallback_G callback) {
         Params params = Params.builder()
-                .group_id(group_id)
-                .user_id(user_id)
+                .group_id(Long.parseLong(group_id))
+                .user_id(Long.parseLong(user_id))
                 .no_cache(no_cache)
                 .build();
         Request request = Request.builder()
@@ -55,7 +55,7 @@ public class get_group_member_info extends GetApi{
                         .join_time(data.getString("join_time"))
                         .user_id(data.getString("user_id"))
                         .nickname(data.getString("nickname"))
-                        .shut_up_timestamp(data.getLong("shut_up_timestamp"))
+//                        .shut_up_timestamp(data.getLong("shut_up_timestamp"))
                         .card(data.getString("card"))
                         .build();
                 callback.onSuccess(res);

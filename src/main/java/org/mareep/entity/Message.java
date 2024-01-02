@@ -1,13 +1,18 @@
 package org.mareep.entity;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Message {
+    private String type;
+    private MessageData data;
     private String post_type;
     private String message_type;
     private Long time;
