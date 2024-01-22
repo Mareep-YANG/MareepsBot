@@ -33,7 +33,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.mareep.Main</mainClass>
+                            <mainClass>org.mareep.onebot.QQbot</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
